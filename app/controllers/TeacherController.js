@@ -1,7 +1,9 @@
 const TeacherController={
     create (req,res){
         
-      
+      my name is priyansh;
+    
+
     }, 
     readAll(req,res){
         
