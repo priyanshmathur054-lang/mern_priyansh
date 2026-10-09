@@ -1,5 +1,6 @@
 const TeacherController={
     create (req,res){
+        
       
     }, 
     readAll(req,res){
