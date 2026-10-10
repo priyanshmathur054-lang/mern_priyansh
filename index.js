@@ -3,13 +3,13 @@ const mongoose=require("mongoose");
 const StudentController = require("./app/controllers/StudentController");
 const TeacherController = require("./app/controllers/TeacherController");
 const PORT = 5789
-app.use(express.json())
-mongoose.connect("mongodb://localhost:27017/StudentDB")
+
+mongoose.connect("mongodb://localhost:27017/StudentDBPri")
 // .then(() => console.log("MongoDB connected Successfully"))
 // .catch((err) => console.log("MongoDB connnection error:",err));
 
 const app = express();
-
+app.use(express.json())
 app.get("/",(req,res)=>{
     res.send("Welcome to my college")
 })

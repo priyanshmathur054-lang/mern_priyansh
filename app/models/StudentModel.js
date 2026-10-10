@@ -21,7 +21,7 @@ const studentSchema= new mongoose.Schema({
     },
 
      Dob:{
-        type:Date,
+        type:String,
         require:true
     },
 
