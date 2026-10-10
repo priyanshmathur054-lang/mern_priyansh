@@ -1,8 +1,14 @@
-const  express = require("express")
-const StudentController = require("./app/Controllers/StudentController")
-const TeacherController = require("./app/controllers/TeacherController")
+const  express = require("express");
+const mongoose=require("mongoose");
+const StudentController = require("./app/controllers/StudentController");
+const TeacherController = require("./app/controllers/TeacherController");
 const PORT = 5789
-const app = express()
+app.use(express.json())
+mongoose.connect("mongodb://localhost:27017/StudentDB")
+// .then(() => console.log("MongoDB connected Successfully"))
+// .catch((err) => console.log("MongoDB connnection error:",err));
+
+const app = express();
 
 app.get("/",(req,res)=>{
     res.send("Welcome to my college")
