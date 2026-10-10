@@ -3,14 +3,28 @@ const StudentModel = require('../models/StudentModel');
 const StudentController = {
  async create(req, res) {
     const body = req.body
+    if(!body.name){
+      res.status(500).send({
+        error: "Name is required"
+      })
+    }else{
+    try {
+       await StudentModel.create(body)
 
-    await StudentModel.create(body)
-
-    res.send({
+    res.status(201).send({
       message: "Success! New record created.",
       reqBody: body
     });
-  },
+    } catch (error) {
+      console.error("Error occured while creating new student:",error);
+      res.status(500).send({
+        error: error,
+      });
+      
+    }
+    }
+  
+},
   async readAll(req, res) {
     const students = await StudentModel.find()
     res.send({

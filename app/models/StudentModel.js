@@ -17,7 +17,8 @@ const studentSchema= new mongoose.Schema({
 
      phone:{
         type:String,
-        require:true
+        require:true,
+        Unique:true
     },
 
      Dob:{
