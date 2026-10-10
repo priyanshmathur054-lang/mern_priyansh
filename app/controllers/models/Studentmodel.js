@@ -20,8 +20,8 @@ const StudentSchema  = new mongoose.Schema({
         type: String,
         required: true
     },
-     CreatedAt: {
-        type: Date,
+     Dob: {
+        type: string,
         required: true
     },
 });
