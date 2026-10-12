@@ -1,33 +1,44 @@
-const  express = require("express");
-const mongoose=require("mongoose");
+const express = require("express");
+const mongoose = require("mongoose")
 const StudentController = require("./app/controllers/StudentController");
 const TeacherController = require("./app/controllers/TeacherController");
-const PORT = 5789
+const { PORT } = require("./app/Utils/constants.utils");
+const AuthController = require("./app/controllers/AuthController");
+const { authMiddleware } = require("./app/middleware/authMiddleware");
 
-mongoose.connect("mongodb://localhost:27017/StudentDBPri")
-// .then(() => console.log("MongoDB connected Successfully"))
-// .catch((err) => console.log("MongoDB connnection error:",err));
+// const PORT = 5789
 
-const app = express();
-app.use(express.json())
-app.get("/",(req,res)=>{
-    res.send("Welcome to my college")
+mongoose.connect("mongodb://localhost:27017/studentDB")
+
+const app = express()
+app.use(express.json());
+app.get("/", (req, res) => {
+    res.send("Welcome To the Coding World!");
 })
 
-app.post("/student",StudentController.create),
-app.get("/student",StudentController.readAll),
-app.get("/student/:id",StudentController.readOne),
-app.put("/student/:id",StudentController.update),
-app.delete("/student/:id",StudentController.destroy),
+app.get("/about", (req, res) => {
+    res.send("Something about me");
+});
 
+app.post("/student", StudentController.create);
+app.get("/student", [authMiddleware], StudentController.readAll);
+app.get("/student/:id", StudentController.readOne);
+app.put("/student/:id", StudentController.update);
+app.delete("/student/:id", StudentController.destroy);
 
-app.post("/Teacher",TeacherController.create),
-app.get("/Teacher",TeacherController.readAll),
-app.get("/Teacher/:id",TeacherController.readOne),
-app.put("/Teacher/:id",TeacherController.update),
-app.delete("/Teacher/:id",TeacherController.destroy),
+app.post("/teacher", TeacherController.create);
+app.get("/teacher", TeacherController.readAll);
+app.get("/teacher/:id", TeacherController.readOne);
+app.put("/teacher/:id", TeacherController.update);
+app.delete("/teacher/:id", TeacherController.destroy);
 
+app.post("/register", AuthController.register);
+app.post("/login", AuthController.login);
 
-app.listen(PORT, () => {
-    console.log(`Server Start at http://localhost:${PORT}`);
-})
+app.listen(PORT, function() {
+    let name = "Sudarshan"
+    console.log('Hello & Welcome To College, ' + name);
+    console.log("Hello & Welcome To College, " + name);
+    console.log(`Server started at http://localhost:${PORT}`);
+    
+});
